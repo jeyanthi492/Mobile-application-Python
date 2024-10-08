@@ -12,7 +12,6 @@ Uri = autoclass('android.net.Uri')
 
 
 class AndroidCamera(Camera):
-
     def _take_picture(self, on_complete, filename=None):
         assert(on_complete is not None)
         self.on_complete = on_complete
@@ -35,9 +34,6 @@ class AndroidCamera(Camera):
         uri = Uri.parse('file://' + filename)
         parcelable = cast('android.os.Parcelable', uri)
         intent.putExtra(MediaStore.EXTRA_OUTPUT, parcelable)
-
-        # 0 = low quality, suitable for MMS messages,
-        # 1 = high quality
         intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1)
         activity.startActivityForResult(intent, 0x123)
 
